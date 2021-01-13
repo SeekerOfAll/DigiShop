@@ -1,0 +1,18 @@
+{% load static %}
+{{ form.non_field_errors }}
+<div class="login">
+    <h1>Login Here</h1>
+    {% for field in form %}
+        <p>{{ field.label_tag }} {{ field }}</p>
+    {% endfor %}
+    <p class="remember_me">
+        <label>
+            <input type="checkbox" name="remember_me" id="remember_me">
+            Remember me on this computer
+        </label>
+    </p>
+    {% if field.help_text %}
+        <small class="form-text text-muted"></small>
+    {% endif %}
+
+</div>

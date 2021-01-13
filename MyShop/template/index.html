@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Start Slider -->
+    {% include 'component/topSlider.html' with slideShow=slides %}
+    <!-- End Slider -->
+
+    <!-- Start Categories  -->
+   {% include 'component/category_index.html' with categoryShow=categories %}
+    <!-- End Categories -->
+
+    <!-- Start Products  -->
+    {% include 'component/product_index.html' with productView=products %}
+    <!-- End Products  -->
+
+
+    <!-- Start Instagram Feed  -->
+    {% include 'component/instagram_img.html' %}
+    <!-- End Instagram Feed  -->
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    Login
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {% include 'component/signForm.html' %}
+                    <p class="submit"><input type="submit" name="commit" value="Login"></p>
+                    <div class="login-help">
+                        <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
