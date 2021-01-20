@@ -5,8 +5,12 @@
     {% include 'component/topSlider.html' with slideShow=slides %}
     <!-- End Slider -->
 
+    <!-- Start Brand  -->
+    {% include 'component/brand_index.html' with brandShow=brands %}
+    <!-- End Brand -->
+
     <!-- Start Categories  -->
-   {% include 'component/category_index.html' with categoryShow=categories %}
+    {% include 'component/category_index.html' with categoryShow=categories %}
     <!-- End Categories -->
 
     <!-- Start Products  -->
@@ -14,8 +18,5 @@
     <!-- End Products  -->
 
 
-    <!-- Start Instagram Feed  -->
-    {% include 'component/instagram_img.html' %}
-    <!-- End Instagram Feed  -->
 
 {% endblock %}

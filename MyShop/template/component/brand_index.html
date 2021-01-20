@@ -1,0 +1,13 @@
+{% load static %}
+<!--start brands sliders-->
+<div class="container h-slid" style="direction: ltr">
+    <h2>Our Popular Brands</h2>
+    <div class="brand-slider">
+        <!--    logo size 400x200-->
+        {% for brand in brandShow %}
+            <div class="brand"><a href="#"><img src="{{ brand.image.url }}" alt=""></a></div>
+            <div class="brand"><a href="#"><img src="{{ brand.image.url }}" alt=""></a></div>
+        {% endfor %}
+    </div>
+</div>
+<!--end brand sliders-->

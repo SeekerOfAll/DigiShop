@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import TemplateView
-from Product.models import Category, Product
+from Product.models import Category, Product, Brand
 from homeView.models import SlideShow
 
 
@@ -14,4 +14,5 @@ class HomeView(TemplateView):
         context['slides'] = SlideShow.objects.all()
         context['categories'] = Category.objects.all()
         context['products'] = Product.objects.all()
+        context['brands'] = Brand.objects.all()
         return context

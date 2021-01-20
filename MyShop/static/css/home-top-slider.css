@@ -1,0 +1,75 @@
+/*Home large Carousel slider*/
+.carousel-caption {
+    margin-bottom: 20%;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px 100px;
+}
+
+.carousel-caption h5 {
+    font-size: 38px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    font-size: 20px;
+}
+
+/*Media Queries*/
+@media only screen and (max-width:991px) {
+    .blogo {
+        text-align:center;
+    }
+}
+
+
+@media only screen and (max-width:1500px) {
+    .carousel-caption {
+        padding-bottom: 2%;
+    }
+}
+
+@media only screen and (max-width:1199px) {
+    .carousel-caption h3 {
+        font-size: 32px;
+    }
+    .carousel-caption p {
+        font-size: 18px;
+    }
+    .carousel-caption {
+        padding-bottom: 2%;
+        margin-bottom: 18%;
+    }
+}
+
+@media only screen and (max-width:991px) {
+    .carousel-caption h3 {
+        font-size: 28px;
+    }
+    .carousel-caption p {
+        display:none;
+    }
+    .carousel-caption {
+        padding-bottom: 5%;
+
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .carousel-caption h3 {
+        font-size: 20px;
+    }
+    .carousel-caption {
+        padding-bottom: 5%;
+        margin-bottom: 15%;
+    }
+}
+
+@media only screen and (max-width:575px) {
+    #carouselFull {
+        display:none;
+    }
+    #about {
+        margin-top: 80px;
+    }
+}
