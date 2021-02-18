@@ -4,9 +4,9 @@ from django.conf import settings
 
 
 class Order(models.Model):
-    create_at = models.DateTimeField(_("create at"), )
-    update_at = models.DateTimeField(_("update at"), )
-    description = models.TextField(_("description"), )
+    create_at = models.DateTimeField(_("create at"), auto_now_add=True)
+    update_at = models.DateTimeField(_("update at"), auto_now_add=True)
+    description = models.TextField(_("description"), default='order', null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='user', on_delete=models.CASCADE,
                              related_name='order',
                              related_query_name='order')
@@ -18,12 +18,31 @@ class Order(models.Model):
     def __str__(self):
         return self.user.first_name
 
+    @property
+    def get_cart_total(self):
+        order_items = OrderItem.objects.all()
+        total = sum([item.total_price for item in order_items])
+        return total
+
+    @property
+    def get_cart_items(self):
+        order_items = OrderItem.objects.all()
+        total = sum([item.count for item in order_items])
+        return total
+
+    @property
+    def total_sum_price(self):
+        t_price = 0
+        item_list = self.order.all()
+        for item in item_list:
+            t_price += item.total_price
+        return t_price
 
 class OrderItem(models.Model):
-    count = models.IntegerField(_("count"), )
-    price = models.IntegerField(_("price"), )
+    count = models.IntegerField(_("count"), default=0)
+    price = models.IntegerField(_("price"), default=0)
     order = models.ForeignKey("Order.Order", verbose_name=_('order'), on_delete=models.CASCADE,
-                              related_name='orderItem', related_query_name='orderItem')
+                              related_name='order', related_query_name='order')
     shop_product = models.ForeignKey("Product.ShopProduct", verbose_name=_('shop_product'), on_delete=models.CASCADE,
                                      related_name='shop_product', related_query_name='shop_product')
 
@@ -32,11 +51,12 @@ class OrderItem(models.Model):
         verbose_name_plural = _('orderItems')
 
     def __str__(self):
-        return self.price
+        return self.shop_product.product.name
 
     @property
     def total_price(self):
-        return self.price * self.count
+        return int(self.shop_product.price) * int(self.count)
+
 
 
 class Payment(models.Model):

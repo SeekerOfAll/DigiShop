@@ -1,0 +1,216 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block product_style %}
+    <link rel="stylesheet" href="{% static 'css/productImage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productStyle.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container col-12 ">
+
+        <!--Product Details -->
+        <div class="row se-co-bo col-12 m-0 p-0 border border-white rounded">
+            <div class="row col-12 m-2 pl-0">
+                <!-- Product Gallery-->
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4  pl-2 ">
+                    <div class="col-12">
+                        <fieldset id="f11" class="active">
+                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
+                        </fieldset>
+                        <fieldset id="f21" class="">
+                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
+                        </fieldset>
+                        <fieldset id="f31" class="">
+                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
+                        </fieldset>
+                        <fieldset id="f41" class="">
+                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
+                        </fieldset>
+                        <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11 thumbnails d-flex">
+                            <div id="f1" class="tb tb-active"><img class="thumbnail-img fit-image"
+                                                                   src="{{ product.image.url }}"></div>
+                            <div id="f2" class="tb"><img class="thumbnail-img fit-image"
+                                                         src="{{ product.image.url }}">
+                            </div>
+                            <div id="f3" class="tb"><img class="thumbnail-img fit-image"
+                                                         src="{{ product.image.url }}">
+                            </div>
+                            <div id="f4" class="tb"><img class="thumbnail-img fit-image"
+                                                         src="{{ product.image.url }}">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Product Title and it's Category and some detail-->
+                <div class=" col-sm-12 col-md-6 col-lg-4 col-xl-4  ">
+                    <div class="col-12 pt-3 d-flex">
+                        عنوان:{{ product.name }}
+                    </div>
+                    <hr class="pb-2">
+
+                    <div class="col-12 d-flex">
+                        <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a>دسته بندی:
+
+                    </div>
+
+                    <hr class="pb-2">
+                    <div class=" col-12 pl-0 ">
+                        <div class="col-12 d-flex">
+                            انتخاب رنگ:
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-outline-primary">قرمز</button>
+                                <button type="button" class="btn btn-outline-primary">زرد</button>
+                                <button type="button" class="btn btn-outline-primary">آبی</button>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-4 mb-4 d-flex">
+                            انتخاب سایز:
+                        </div>
+                    </div>
+                    <hr class="pb-2">
+                    <div class="col-12 d-flex">
+                        ویژگی کالا:{{ product.detail }}
+
+                    </div>
+                </div>
+                <!-- Product price and shop name-->
+                <div class=" col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
+
+                    <div class="col-12 pt-1">
+                        {% for shopProduct in shop_product|slice:"1" %}
+                            <div class="col-12 se-co-bo-bot height-size pt-3 mx-auto rounded d-flex">
+                                فروشنده:{{ shopProduct.shop.name }}
+                            </div>
+                            <div class="col-12 se-co-bo-bot height-size pt-3 mx-auto rounded d-flex">
+
+                                گارانتی اصالت و سلامت فیزیکی کالا
+
+                            </div>
+                            <div class="col-12 se-co-bo-bot rounded">
+                                <div class="row col-12 justify-content-center pt-4 mx-auto">
+                                    قیمت:{{ shopProduct.price }}
+                                </div>
+                                <div class="row col-12 justify-content-center pt-4 mb-3 mx-auto">
+                                    <a href="#">
+                                        <button data-product="{{ shopProduct.id }}" data-action="add"
+                                                type="button"
+                                                class="btn btn-primary btn-lg btn-outline-primary update-cart">
+                                            افزودن به سبد خرید
+
+                                            {#                                      onclick="addToBasket({{ product.id }})#}
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Related Shop to current product-->
+        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
+            {% for shopProduct in shop_product|slice:"1:" %}
+                <div class="row col-12  rounded se-co-bo m-0 p-3">
+                    <div class="row  col-4 pt-2 mx-auto">فروشنده:{{ shopProduct.shop.name }}</div>
+                    <div class="row col-4 justify-content-center pt-2 mx-auto">
+                        قیمت:{{ shopProduct.price }}</div>
+                    <div class="row col-4 justify-content-center mx-auto">
+                        <button data-product="{{ shopProduct.id }}" data-action="add" type="button"
+                                class="btn btn-info btn-lg btn-block  update-cart">افزودن به سبد خرید
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!--Related Product to current product-->
+        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
+            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3">
+                محصولات مرتبط
+            </div>
+
+            <div class="row col-12  rounded se-co-bo m-0 p-3">
+                {% for cat in related_categories %}
+                    <div class="row col-3  mx-auto   ">
+                        <div class="row col-12 m-0 justify-content-center  "><a href="{{ cat.get_absolute_url }}"><img class=""
+                                                                                  style="height: 250px ;width: auto"
+                                                                                  src="{{ cat.image.url }}" alt=""></a>
+                        </div>
+                        <div class="row col-12 m-0 justify-content-center mt-3">Title:{{ cat.name }}</div>
+                        <div class="row col-12 m-0 justify-content-center mt-3">
+                            price:{{ cat.ShopProduct.all.first.price }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Product Description -->
+        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
+            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3">توضیحات</div>
+            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3 description-height">{{ product.detail }}</div>
+        </div>
+
+        <!-- Product Comment-->
+        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
+            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3" id="comment_container">نظرها</div>
+            {% for comment in comments %}
+                <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3 comment-height commententries">
+                    <div class="row col-2  rounded se-co-bo border-bottom m-0 p-3 author-name">{{ comment.author.first_name }}</div>
+                    <div class="row col-10  rounded se-co-bo border-bottom m-0 p-3 comment-body">{{ comment.content }}</div>
+                    <div class="reply">
+                        <p>
+                            <span id="dislike_count_container{{ comment.id }}"><i
+                                    onclick="likeComment({{ comment.id }} , false)"
+                                    class="fa fa-thumbs-down"></i></span>
+                            <span id="like_count_container{{ comment.id }}"><i onclick="likeComment({{ comment.id }})"
+                                                                               class="fa fa-thumbs-up"></i></span>
+                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <form id="comment_form">
+            {% csrf_token %}
+            <div class="d-flex flex-column mt-3 mb-3">
+                <textarea class="mt-3 p-2 m-auto comment_text" rows="8" id="id_content"></textarea>
+                <input type="submit" class="btn btn-primary mt-2 comment_button" value="ارسال نظر">
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block product_script %}
+<script>
+    document.getElementById("comment_form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const content = $('#id_content').val()
+        const data = JSON.stringify({content, product_id:{{product.id}}})
+        $.ajax({
+            type: "POST",
+            url: "{% url 'comment_create' %}",
+            data: data,
+            success: function (response) {
+                const data = JSON.parse(response)
+                $("#comment_container").prepend(`<div class="row col-12  rounded se-co-bo border-bottom m-0 p-3 comment-height commententries">
+                    <div class="row col-2  rounded se-co-bo border-bottom m-0 p-3 author-name">${data.first_name}</div>
+                    <div class="row col-10  rounded se-co-bo border-bottom m-0 p-3 comment-body">${data.content}</div>
+                    <div class="reply">
+                        <p>
+                            <span id="dislike_count_container${data.comment_id}"><i
+                                    onclick="likeComment(${data.comment_id} , false)"
+                                    class="fa fa-thumbs-down"></i></span>
+                            <span id="like_count_container${data.comment_id}"><i onclick="likeComment(${data.comment_id})"
+                                                                               class="fa fa-thumbs-up"></i></span>
+                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>
+                        </p>
+                    </div>
+                </div>`);
+            }
+        });
+    }, false);
+</script>
+{% endblock %}

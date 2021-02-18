@@ -44,8 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True, db_index=True)
     mobile = models.CharField(_('mobile number'), blank=True, max_length=20)
     # password = models.CharField(_('password'), max_length=50)
-    image = models.ImageField(_('Image'), upload_to='user/image/', null=True, blank=True, height_field=100,
-                              width_field=100, max_length=100)
+    image = models.ImageField(_('Image'), upload_to='user/image/', null=True, blank=True, max_length=100)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,

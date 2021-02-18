@@ -1,0 +1,146 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block cart_styles %}
+    <link rel="stylesheet" href="{% static 'css/cart_Style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="direction: ltr">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box-element">
+
+                    <a class="btn btn-outline-dark" href="#">&#x2190; Continue Shopping</a>
+
+                    <br>
+                    <br>
+                    <table class="table">
+                        <tr>
+                            <th><h5>Items: <strong>{{ total_items.count__sum }}</strong></h5></th>
+                            <th><h5>Total:<strong> ${{ total_price.price__sum|floatformat:2 }}</strong></h5></th>
+                            <th>
+                                <a style="float:right; margin:5px;" class="btn btn-success" href="#">Checkout</a>
+                            </th>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <br>
+                <div class="box-element">
+                    <div class="cart-row">
+                        <div style="flex:2"></div>
+                        <div style="flex:2"><strong>Item</strong></div>
+                        <div style="flex:1"><strong>Price</strong></div>
+                        <div style="flex:1"><strong>Quantity</strong></div>
+                        <div style="flex:1"><strong>Total</strong></div>
+                    </div>
+                    {% for item in order_item %}
+                        <div class="cart-row">
+                            <div style="flex:2"><img class="row-image" src="{{item.shop_product.product.image.url}}"></div>
+                            <div style="flex:2"><p>{{ item.shop_product.product.name }}</p></div>
+                            <div style="flex:1"><p>${{ item.shop_product.price|floatformat:2 }}</p></div>
+                            <div style="flex:1">
+                                <p class="quantity">{{ item.count }}</p>
+                                <div class="quantity">
+                                    <img data-product="{{ item.shop_product.id }}" data-action="add"
+                                         class="chg-quantity update-cart" src="{% static  'images/cart_image/arrow-up.png' %}">
+
+                                    <img data-product="{{ item.shop_product.id }}" data-action="remove"
+                                         class="chg-quantity update-cart" src="{% static  'images/cart_image/arrow-down.png' %}">
+                                </div>
+                            </div>
+                            <div style="flex:1"><p>${{ item.total_price|floatformat:2 }}</p></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block cart_script %}
+    <script src="{% static 'js/cartScript.js' %}"></script>
+{% endblock %}
+
+{#    <!-- Start All Title Box -->#}
+{#    <div class="all-title-box mb-0">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <!-- End All Title Box -->#}
+{##}
+{#    <!-- Start Cart  -->#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-12">#}
+{#                <h2>Cart</h2>#}
+{#                <ul class="breadcrumb justify-content-center">#}
+{#                    <li class="breadcrumb-item"><a href="#">Shop</a></li>#}
+{#                    <li class="breadcrumb-item active">Cart</li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="shopping-cart col-12 mt-0 mb-0">#}
+{#                <!-- Title -->#}
+{#                {% if status %}#}
+{#                    <div class="title d-flex justify-content-center">#}
+{#                        {{ status }}#}
+{#                    </div>#}
+{#                {% else %}#}
+{#                    <div class="title d-flex justify-content-center">#}
+{#                        Shopping Bag#}
+{#                    </div>#}
+{#                {% endif %}#}
+{##}
+{#                <!-- Product #1 -->#}
+{#                <div class="item col-12">#}
+{#                    <div class="buttons">#}
+{#                        <span class="delete-btn"></span>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <img class="image_max mr-0" src="../static/images/shirt-img.jpg" alt="">#}
+{#                    </div>#}
+{##}
+{#                    <div class="description">#}
+{#                        <span>Common Projects</span>#}
+{#                    </div>#}
+{#                    <div class="quantity">#}
+{#                        <button class="plus-btn" type="button" name="button">#}
+{#                            <img src="{% static 'image/icon/plus.svg' %}" alt=""/>#}
+{#                        </button>#}
+{#                        <input type="text" name="name" value="1">#}
+{#                        <button class="minus-btn" type="button" name="button">#}
+{#                            <img src="{% static 'image/icon/minus.svg' %}" alt=""/>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="total-price">$549</div>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class=" col-12" style="background-color: white">#}
+{#                <div class="my-4">#}
+{#                    <div class="col-12">#}
+{#                        <div class="d-flex gr-total ">#}
+{#                            <div class="col-6"><h5>Grand Total</h5></div>#}
+{#                            <div class="d-flex col-6 ml-auto h5 justify-content-start"> $ 388</div>#}
+{#                        </div>#}
+{#                        <hr>#}
+{#                    </div>#}
+{#                    <div class="d-flex col-12 shopping-box justify-content-center">#}
+{#                        <a href="checkout.html" class=" btn hvr-hover">#}
+{#                            Checkout#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <!-- End Cart -->#}

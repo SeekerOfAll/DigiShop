@@ -1,0 +1,153 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block category_style %}
+    <link rel="stylesheet" href="{% static 'css/categoryStyle.css' %}">
+{% endblock %}
+
+{% block content %}
+    {#Producds of a Category#}
+    <div class="container col-12 border border-white rounded">
+
+        <div class="row col-12 " style="background-color:#cacaca">
+            {#Side line#}
+            <div class="row col-3 rounded">
+                <aside>
+                    <div class="row col-12 mb-4">
+                        <div class="row col-12 mt-2 hr_line">برند ها</div>
+                        <div class="row col-12 h-100 div_Col3">
+                            <ul class="mt-2">
+                                {% for brand in brand_list %}
+                                    <a href="{{ category.get_absolute_url }}">
+                                        <li class=" row">{{ brand }}</li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row d-flex col-12 mb-4">
+                        <div class="row col-12 mt-2 hr_line ">دسته بندی ها</div>
+                        <div class="row col-12 h-100 div_Col3">
+                            <ul class="mt-2">
+
+                                {% for category in categories %}
+                                    {% if category.parent %}
+                                        <a href="{{ category.parent.get_absolute_url }}">
+                                            <li class=" row">{{ category.parent.name }}</li>
+                                        </a>
+                                        {% for category_all in category_all %}
+                                            {% if category_all.parent == category.parent %}
+                                                <a href="{{ category_all.get_absolute_url }}">
+                                                    <li class=" row">{{ category_all.name }}</li>
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        <a href="{{ category.get_absolute_url }}">
+                                            <li class=" row">{{ category.name }}</li>
+                                        </a>
+                                        {% for category_all in category_all %}
+                                            {% if category_all.parent.name == category.name %}
+                                                <a href="{{ category_all.get_absolute_url }}">
+                                                    <li class=" row">{{ category_all.name }}</li>
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row col-12 ">
+                        <div class="row col-12 mt-2 hr_line">جستجو</div>
+                        <div class="row col-12 h-100 div_Col3">
+                            <ul class="mt-2">
+                                <li class=" row">دستهs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+            {#Products#}
+            <div class="row col-9 h-100">
+                {#A Title#}
+                <div class="row justify-content-center col-12 m-2  mr-4">
+                    محصولات
+                </div>
+                {#Button to filter#}
+                <div class="row col-12 m-2  mr-4">
+                    <div class="ml-1">
+                        <a href="#" class="clickme all">همه</a>
+                    </div>
+                    <div class="ml-1">
+                        <a href="#" class="clickme sell">پر فروش ها</a>
+                    </div>
+                    <div class="ml-1">
+                        <a href="#" class="clickme seen">پر بازدید ها</a>
+                    </div>
+                </div>
+                {#Product#}
+                <div class="row justify-content-center col-12 mt-2 mr-3 p-2 mx-auto">
+                    {% for product in product_list %}
+                        <div class=" col-lg-4">
+                            <img class="thumbnail row col-12 m-0 justify-content-center  p-0"
+                                 src="{{ product.image.url }}">
+                            <div class="box-element product ">
+                                <h6><strong>{{ product.name }}</strong></h6>
+                                <hr>
+
+                                {#                                <button data-product="{{ product.id }}" data-action="add"#}
+                                {#                                        class="btn btn-outline-secondary add-btn update-cart">Add to Cart#}
+                                {#                                </button>#}
+
+                                <a class="btn btn-outline-success" href=" {{ product.get_absolute_url }}"
+                                   style="width:100%">View</a>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {#                <div class="row justify-content-center col-12 mt-2 mr-3 p-2">#}
+                {#                    {% for product in product_list %}#}
+                {#                        <div class="row col-3  mx-auto ">#}
+                {#                            <div class="row col-12 m-0 justify-content-center  ">#}
+                {#                                <a href="{{ product.get_absolute_url }}"><img class=""#}
+                {#                                                                              style="height: 250px ;width: auto"#}
+                {#                                                                              src="{{ product.image.url }}"#}
+                {#                                                                              alt="">#}
+                {#                                </a>#}
+                {#                            </div>#}
+                {#                            <div class="row col-12 m-0 justify-content-center mt-3">Title:{{ product.name }}</div>#}
+                {#                            <div class="row col-12 m-0 justify-content-center mt-3">#}
+                {#                                price:{{ product.price }}</div>#}
+                {#                        </div>#}
+                {#                    {% endfor %}#}
+                {#                <div class="row col-3">#}
+                {#                    <div><img src="" alt=""></div>#}
+                {#                    <div></div>#}
+                {#                    <div></div>#}
+                {#                </div>#}
+                {#                </div>#}
+            </div>
+        </div>
+    </div>
+
+
+    {#    <div class="container">#}
+    {#        <div class="row">#}
+    {#            {% for category in categoryShow %}#}
+    {#                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">#}
+    {#                    <div class="shop-cat-box">#}
+    {#                        <img class="img-fluid" src="{{ category.image.url }}" alt=""/>#}
+    {#                        <a class="btn hvr-hover" href="{{ category.get_absolute_url }}">{{ category.name }}</a>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            {% endfor %}#}
+    {##}
+    {#        </div>#}
+    {#    </div>#}
+
+{% endblock %}
+

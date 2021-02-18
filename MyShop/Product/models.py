@@ -26,6 +26,47 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={'pro_slug': self.slug})
 
+
+class ShopProduct(models.Model):
+    shop = models.ForeignKey('Account.Shop', verbose_name=_('Shop'), related_name='ShopProduct',
+                             related_query_name='ShopProduct', on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey('Product.Product', verbose_name=_('Product'), related_name='ShopProduct',
+                                related_query_name='ShopProduct', on_delete=models.CASCADE, null=True)
+    price = models.CharField(_('Price'), max_length=50, default=0)
+    quantity = models.CharField(_('Quantity'), max_length=50, default=0)
+
+    class Meta:
+        verbose_name = _('shop_product')
+        verbose_name_plural = _('shops_products')
+
+    def __str__(self):
+        return str(self.id)
+
+    def get_absolute_url(self):
+        return reverse('shop_product_detail', kwargs={'pk': self.pk})
+
+
+class Comment(models.Model):
+    content = models.TextField(_("Content"), )
+    create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
+    update_at = models.DateTimeField(_("Update at"), auto_now=True)
+    product = models.ForeignKey("Product.Product", verbose_name=_("product"), related_name="comments",
+                                related_query_name="comments", on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Author"), on_delete=models.CASCADE,
+                               related_name='comment', related_query_name='comment')
+    is_confirmed = models.BooleanField(_("Confirm"), default=True)
+
+    class Meta:
+        verbose_name = _("Comment")
+        verbose_name_plural = _("Comments")
+        ordering = ["-create_at"]
+
+    def __str__(self):
+        return self.product.name
+
+    def get_absolute_url(self):
+        return reverse('comment_detail', kwargs={'pk': self.pk})
+
     @property
     def like_count(self):
         q = Likes.objects.filter(comment=self, condition=True)
@@ -35,44 +76,6 @@ class Product(models.Model):
     def dislike_count(self):
         q = Likes.objects.filter(comment=self, condition=False)
         return q.count()
-
-
-class ShopProduct(models.Model):
-    shop = models.ForeignKey('Account.Shop', verbose_name=_('Shop'), related_name='ShopProduct',
-                             related_query_name='ShopProduct', on_delete=models.CASCADE)
-    product = models.ForeignKey('Product.Product', verbose_name=_('Product'), related_name='ShopProduct',
-                                related_query_name='ShopProduct', on_delete=models.CASCADE)
-    price = models.CharField(_('Price'), max_length=50)
-    quantity = models.CharField(_('Quantity'), max_length=50)
-
-    class Meta:
-        verbose_name = _('shop_product')
-        verbose_name_plural = _('shops_products')
-
-    def __str__(self):
-        return self.price
-
-    def get_absolute_url(self):
-        return reverse('shop_product_detail', kwargs={'pk': self.pk})
-
-
-class Comment(models.Model):
-    text = models.TextField(_('Text'), blank=True, help_text="Enter Your Comment")
-    rate = models.IntegerField(_('Rate'), blank=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("User"), related_name='Comment',
-                             related_query_name='Comment', on_delete=models.CASCADE)
-    product = models.ForeignKey("Product.Product", verbose_name=_("Product"), related_name='Comment',
-                                related_query_name='Comment', on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = _('comment')
-        verbose_name_plural = _('comments')
-
-    def __str__(self):
-        return self.product.name
-
-    def get_absolute_url(self):
-        return reverse('comment_detail', kwargs={'pk': self.pk})
 
 
 class Image(models.Model):

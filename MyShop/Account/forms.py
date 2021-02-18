@@ -2,6 +2,8 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
+from Account.models import Address
+
 User = get_user_model()
 
 
@@ -24,3 +26,15 @@ class UserRegistrationForm(forms.ModelForm):
                   'first_name': forms.TextInput(attrs={'class': 'form-control'}),
                   'last_name': forms.TextInput(attrs={'class': 'form-control'}), }
         help_text = {'email': _('A valid email for reset your password'), }
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'mobile', 'image')
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ('city', 'street', 'alley', 'zip_code')

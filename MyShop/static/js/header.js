@@ -21,3 +21,11 @@ $(window).scroll(function() {
   }
 });
 
+
+$(".icon-search").on("click",function(){
+  console.log("kiki")
+  $(".search-form").fadeToggle();
+  $(".fa-search").toggleClass("fa-times").css("transform", "rotate(0deg)");
+  $(".fa-times").css("transform", "rotate(0deg)" );
+
+})

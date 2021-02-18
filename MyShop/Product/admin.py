@@ -55,12 +55,10 @@ class ShopProductAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields': ['text', 'rate']}),
-                 ('Related Table Information', {'fields': ['user', 'product'], 'classes': ['collapse']}),
-                 ]
-    list_display = ('user', 'product', 'text', 'rate')
-    list_filter = ['rate', 'user']
-    search_fields = ['user', 'product']
+    list_display = ('author', 'product', 'is_confirmed')
+    search_fields = ('content',)
+    list_filter = ('is_confirmed',)
+    date_hierarchy = 'create_at'
     list_per_page = 5
 
     def make_published(self, request, queryset):

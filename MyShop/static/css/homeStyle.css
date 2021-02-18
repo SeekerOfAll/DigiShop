@@ -8,15 +8,7 @@ input[type='search']::-webkit-search-results-decoration {
     -webkit-appearance: none;
 }
 
-body ,html{
-    padding-top: 5px;
-    /*background: url("../image/body/dandelion-back.jpg") no-repeat;*/
-    /*background-size: cover;*/
-    /*overflow-x: hidden;*/
-    height: auto;
-    width: 100%;
-    direction: rtl;
-}
+
 
 .navbar-brand img {
     height: 50px;

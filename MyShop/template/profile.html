@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block profile_style %}
+    <link rel="stylesheet" href="{% static 'css/profileStyle.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container col-12">
+        <div class="row col-12 m-0 p-0">
+            <div class="col-4">
+                <div class="col-12 d-flex justify-content-center"><img class="profile_image"
+                                                                       style="width: auto;height: 200px"
+                                                                       src="{{ user.image.url }}" alt="userImage"></div>
+                <div class="col-12 d-flex justify-content-center">{{ user.first_name }}&nbsp;{{ user.last_name }}</div>
+                <div class="col-12 d-flex justify-content-center">
+                    <a class="btn btn-warning" href="{% url 'update_profile'%}">Edit Profile</a>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="col-12 d-flex mt-2">
+                    <div class="col-12 ">Email: {{ user.email }}</div>
+                </div>
+                <div class="col-12 d-flex mt-2">
+                    <div class="col-12">Mobile: {{ user.mobile }}</div>
+                </div>
+                <div class="col-12 d-flex mt-2">
+                    <div class="col-12">
+                        Address: {{ user.Address.all.first.city }}&nbsp;{{ user.Address.all.first.street }}&nbsp;{{ user.Address.all.first.alley }}&nbsp;{{ user.Address.all.first.zip_code }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<script>
+
+</script>
