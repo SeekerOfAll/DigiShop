@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="row row-fluid mb-6 pt-8">
+    <div class="col-sm-12">
+        <div class="container">
+            {% for category in categoryShow %}
+                {% if not category.parent %}
+                    <div class="col-sm-4 mb-1">
+                        <div class="box-ft box-ft-1">
+                            <img style="width:370px; height:275px " src="{{ category.image.url }}" alt="">
+                            <a href="{{ category.get_absolute_url }}">
+                            <span class="bof-tf-title-wrap">
+                                <span class="bof-tf-title-wrap-2">
+                                    <span class="bof-tf-title">{{ category.name }}</span>
+                                </span>
+                            </span>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

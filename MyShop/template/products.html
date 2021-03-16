@@ -1,216 +1,411 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block product_style %}
-    <link rel="stylesheet" href="{% static 'css/productImage.css' %}">
-    <link rel="stylesheet" href="{% static 'css/productStyle.css' %}">
+
+{% block profileStyle %}
+    <link rel="stylesheet" href="{% static 'css/profileStyle.css' %}">
 {% endblock %}
 {% block content %}
-    <div class="container col-12 ">
 
-        <!--Product Details -->
-        <div class="row se-co-bo col-12 m-0 p-0 border border-white rounded">
-            <div class="row col-12 m-2 pl-0">
-                <!-- Product Gallery-->
-                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4  pl-2 ">
-                    <div class="col-12">
-                        <fieldset id="f11" class="active">
-                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
-                        </fieldset>
-                        <fieldset id="f21" class="">
-                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
-                        </fieldset>
-                        <fieldset id="f31" class="">
-                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
-                        </fieldset>
-                        <fieldset id="f41" class="">
-                            <div class="product-pic"><img class="pic0" src="{{ product.image.url }}"></div>
-                        </fieldset>
-                        <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11 thumbnails d-flex">
-                            <div id="f1" class="tb tb-active"><img class="thumbnail-img fit-image"
-                                                                   src="{{ product.image.url }}"></div>
-                            <div id="f2" class="tb"><img class="thumbnail-img fit-image"
-                                                         src="{{ product.image.url }}">
-                            </div>
-                            <div id="f3" class="tb"><img class="thumbnail-img fit-image"
-                                                         src="{{ product.image.url }}">
-                            </div>
-                            <div id="f4" class="tb"><img class="thumbnail-img fit-image"
-                                                         src="{{ product.image.url }}">
-                            </div>
-
-                        </div>
-
-                    </div>
+    <div id="wrapper" class="wide-wrap">
+        <div class="offcanvas-overlay"></div>
+        <div class="heading-container">
+            <div class="container heading-standar">
+                <div class="page-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'homeView' %}" class="home"><span>Home</span></a></li>
+                        <li>Product</li>
+                    </ul>
                 </div>
-                <!-- Product Title and it's Category and some detail-->
-                <div class=" col-sm-12 col-md-6 col-lg-4 col-xl-4  ">
-                    <div class="col-12 pt-3 d-flex">
-                        عنوان:{{ product.name }}
-                    </div>
-                    <hr class="pb-2">
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 main-wrap">
+                        <div class="main-content">
+                            <div class="vc_row vc_row-fluid">
+                                <div class="vc_col-sm-12">
+                                    <div class="commerce">
+                                        <div class="single-product">
+                                            <div class="style-1 product">
+                                                <div class="row summary-container">
+                                                    <div class="col-md-6 col-sm-6 entry-image">
+                                                        <div class="single-product-images">
+                                                            <div class="single-product-images-slider">
+                                                                <div class="caroufredsel product-images-slider"
+                                                                     data-synchronise=".single-product-images-slider-synchronise"
+                                                                     data-scrollduration="500" data-height="variable"
+                                                                     data-scroll-fx="none" data-visible="1"
+                                                                     data-circular="1" data-responsive="1">
+                                                                    <div class="caroufredsel-wrap">
+                                                                        <ul class="caroufredsel-items">
+                                                                            <li class="caroufredsel-item">
+                                                                                <a href="{{ product.image.url }}"
+                                                                                   data-rel="magnific-popup-verticalfit"
+                                                                                   title="Product-5">
+                                                                                    <img width="800" height="800"
+                                                                                         src="{{ product.image.url }}"
+                                                                                         alt="Product-5"/>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="caroufredsel-item">
+                                                                                <div class="thumb">
+                                                                                    <a href="{{ product.image.url }}"
+                                                                                       data-rel="magnific-popup-verticalfit">
+                                                                                        <img width="800" height="800"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-5"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="caroufredsel-item">
+                                                                                <div class="thumb">
+                                                                                    <a href="{{ product.image.url }}"
+                                                                                       data-rel="magnific-popup-verticalfit">
+                                                                                        <img width="800" height="800"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-5"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="caroufredsel-item">
+                                                                                <div class="thumb">
+                                                                                    <a href="{{ product.image.url }}"
+                                                                                       data-rel="magnific-popup-verticalfit">
+                                                                                        <img width="800" height="800"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-5"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <a href="#" class="caroufredsel-prev"></a>
+                                                                        <a href="#" class="caroufredsel-next"></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="share-links">
+                                                                    <div class="share-icons">
+																			<span class="facebook-share">
+																				<a href="#"><i
+                                                                                        class="fa fa-facebook"></i></a>
+																			</span>
+                                                                        <span class="twitter-share">
+																				<a href="#"><i
+                                                                                        class="fa fa-twitter"></i></a>
+																			</span>
+                                                                        <span class="google-plus-share">
+																				<a href="#"><i
+                                                                                        class="fa fa-google-plus"></i></a>
+																			</span>
+                                                                        <span class="linkedin-share">
+																				<a href="#"><i
+                                                                                        class="fa fa-linkedin"></i></a>
+																			</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="single-product-thumbnails">
+                                                                <div class="caroufredsel product-thumbnails-slider"
+                                                                     data-visible-min="2" data-visible-max="4"
+                                                                     data-scrollduration="500" data-direction="up"
+                                                                     data-responsive="0" data-circular="1"
+                                                                     data-height="100%">
+                                                                    <div class="caroufredsel-wrap">
+                                                                        <ul class="single-product-images-slider-synchronise caroufredsel-items">
+                                                                            <li class="caroufredsel-item selected">
+                                                                                <div class="thumb">
+                                                                                    <a href="#" data-rel="0">
+                                                                                        <img width="200" height="200"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-5"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="caroufredsel-item">
+                                                                                <div class="thumb">
+                                                                                    <a href="#" data-rel="1">
+                                                                                        <img width="200" height="200"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-5"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="caroufredsel-item">
+                                                                                <div class="thumb">
+                                                                                    <a href="#" data-rel="2">
+                                                                                        <img width="200" height="200"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-5"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="caroufredsel-item">
+                                                                                <div class="thumb">
+                                                                                    <a href="#" data-rel="3">
+                                                                                        <img width="200" height="200"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-5"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 entry-summary">
+                                                        <div class="summary">
 
-                    <div class="col-12 d-flex">
-                        <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a>دسته بندی:
+                                                            <div class="commerce-product-rating">
+                                                                <div class="star-rating">
+                                                                    <span style="width:0%"></span>
+                                                                </div>
+                                                                <a href="#reviews" class="commerce-review-link">
+                                                                    <span class="count">0</span> customer reviews
+                                                                </a>
+                                                            </div>
+                                                            <h1 class="product_title entry-title">{{ product.name }}</h1>
+                                                            {% for shopProduct in shop_product|slice:"1" %}
+                                                                <p class="price">
+                                                                    <span class="amount">{{ shopProduct.price }}&#36;</span>
+                                                                </p>
+                                                            {% endfor %}
+                                                            <div class="product-excerpt">
+                                                                {{ product.detail }}
+                                                            </div>
+                                                            <form class="cart">
+                                                                {% for shopProduct in shop_product|slice:"1" %}
+                                                                    <div class="add-to-cart-table">
+                                                                        <div class="quantity">
+                                                                            <input type="number" step="1" min="1"
+                                                                                   name="quantity" value="1" title="Qty"
+                                                                                   class="input-text qty text"
+                                                                                   size="4"/>
+                                                                        </div>
+                                                                        <button data-product="{{ shopProduct.id }}"
+                                                                                data-action="add" type="submit"
+                                                                                class="button update-cart">Add to cart
+                                                                        </button>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </form>
+                                                            <p><a href="#">Add to Wishlist</a></p>
+                                                            <div class="clear"></div>
 
-                    </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="commerce-tab-container">
+                                                    <div class="tabbable commerce-tabs">
+                                                        <ul class="nav nav-tabs">
+                                                            <li class="vc_tta-tab active">
+                                                                <a data-toggle="tab" href="#tab-1">Description</a>
+                                                            </li>
+                                                            <li class="vc_tta-tab">
+                                                                <a data-toggle="tab" href="#tab-2">Reviews</a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content">
+                                                            <div id="tab-1" class="tab-pane fade in active">
 
-                    <hr class="pb-2">
-                    <div class=" col-12 pl-0 ">
-                        <div class="col-12 d-flex">
-                            انتخاب رنگ:
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-outline-primary">قرمز</button>
-                                <button type="button" class="btn btn-outline-primary">زرد</button>
-                                <button type="button" class="btn btn-outline-primary">آبی</button>
-                            </div>
-                        </div>
+                                                                <p>{{ product.description }}</p>
 
-                        <div class="col-12 mt-4 mb-4 d-flex">
-                            انتخاب سایز:
-                        </div>
-                    </div>
-                    <hr class="pb-2">
-                    <div class="col-12 d-flex">
-                        ویژگی کالا:{{ product.detail }}
+                                                            </div>
+                                                            <div id="tab-2" class="tab-pane fade">
+                                                                <div id="comments" class="comments-area">
+                                                                    <ol class="comments-list" id="comment_container">
+                                                                        {% for comment in comments %}
+                                                                            <li class="comment">
+                                                                                <div class="comment-wrap">
+                                                                                    <div class="comment-img">
+                                                                                        {% if comment.author.image %}
+                                                                                            <img alt=""
+                                                                                                 src="{{ comment.author.image.url }}"
+                                                                                                 class='avatar'
+                                                                                                 height='80'
+                                                                                                 width='80'/>
+                                                                                        {% else %}
+                                                                                            <img alt=""
+                                                                                                 src="{% static 'images/profile/avatar.jpeg' %}"
+                                                                                                 class='avatar'
+                                                                                                 height='80'
+                                                                                                 width='80'/>
+                                                                                        {% endif %}
+                                                                                    </div>
+                                                                                    <div class="comment-block">
+                                                                                        <header class="comment-header">
+                                                                                            <cite class="comment-author">
+                                                                                                {{ comment.author.first_name }}
+                                                                                            </cite>
+                                                                                        </header>
+                                                                                        <div class="comment-content">
+                                                                                            <p>
+                                                                                                {{ comment.content }}
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                    </ol>
+                                                                    <div class="comment-respond">
+                                                                        <h3 class="comment-reply-title">
+                                                                            <span>Leave your thought</span>
+                                                                        </h3>
+                                                                        <form id="comment_form">
+                                                                            {% csrf_token %}
+                                                                            <div class="row">
+                                                                                <div class="comment-form-comment col-sm-12">
+                                                                                    <textarea class="form-control"
+                                                                                              placeholder="Comment"
+                                                                                              id="comment"
+                                                                                              name="comment" cols="40"
+                                                                                              rows="6"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-submit">
+                                                                                <input name="submit" type="submit"
+                                                                                       id="submit" class="submit"
+                                                                                       value="Submit"/>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="related products">
+                                                    <div class="related-title">
+                                                        <h3><span>Related Products</span></h3>
+                                                    </div>
+                                                    <ul class="products columns-4">
+                                                        {% for product in related_categories %}
+                                                            <li class="product">
+                                                                <div class="product-container">
 
-                    </div>
-                </div>
-                <!-- Product price and shop name-->
-                <div class=" col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
+                                                                    <figure>
+                                                                        <div class="product-wrap">
+                                                                            <div class="product-images">
+                                                                                <div class="shop-loop-thumbnail shop-loop-front-thumbnail">
+                                                                                    <a href="{{ product.get_absolute_url }}">
+                                                                                        <img width="400" height="450"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-1"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="shop-loop-thumbnail shop-loop-back-thumbnail">
+                                                                                    <a href="{{ product.get_absolute_url }}">
+                                                                                        <img width="400" height="450"
+                                                                                             src="{{ product.image.url }}"
+                                                                                             alt="Product-1alt"/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="shop-loop-actions">
+                                                                                <a href="#"
+                                                                                   class="add_to_cart_button product_type_simple">
+                                                                                    View
+                                                                                </a>
+                                                                                <a class="shop-loop-quickview"
+                                                                                   href="{{ product.get_absolute_url }}"
+                                                                                   data-original-title="Quick view">
+                                                                                </a>
+                                                                                <div class="yith-wcwl-add-to-wishlist">
+                                                                                    <div class="yith-wcwl-add-button">
+                                                                                        <a href="#"
+                                                                                           class="add_to_wishlist">
+                                                                                            Add to Wishlist
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="clear"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <figcaption>
+                                                                            <div class="shop-loop-product-info">
+                                                                                <div class="info-title">
+                                                                                    <h3 class="product_title">
+                                                                                        <a href="{{ product.get_absolute_url }}">
+                                                                                            {{ product.name }}
+                                                                                        </a>
+                                                                                    </h3>
+                                                                                </div>
+                                                                                <div class="info-meta">
+                                                                                    <div class="info-price">
+																						<span class="price">
+																							<span class="amount">
+																								{{ product.ShopProduct.all.first.price }}&#36;
+																							</span>
+																						</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </figcaption>
+                                                                    </figure>
 
-                    <div class="col-12 pt-1">
-                        {% for shopProduct in shop_product|slice:"1" %}
-                            <div class="col-12 se-co-bo-bot height-size pt-3 mx-auto rounded d-flex">
-                                فروشنده:{{ shopProduct.shop.name }}
-                            </div>
-                            <div class="col-12 se-co-bo-bot height-size pt-3 mx-auto rounded d-flex">
-
-                                گارانتی اصالت و سلامت فیزیکی کالا
-
-                            </div>
-                            <div class="col-12 se-co-bo-bot rounded">
-                                <div class="row col-12 justify-content-center pt-4 mx-auto">
-                                    قیمت:{{ shopProduct.price }}
+                                                                </div>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="row col-12 justify-content-center pt-4 mb-3 mx-auto">
-                                    <a href="#">
-                                        <button data-product="{{ shopProduct.id }}" data-action="add"
-                                                type="button"
-                                                class="btn btn-primary btn-lg btn-outline-primary update-cart">
-                                            افزودن به سبد خرید
-
-                                            {#                                      onclick="addToBasket({{ product.id }})#}
-                                        </button>
-                                    </a>
-                                </div>
                             </div>
-                        {% endfor %}
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!--Related Shop to current product-->
-        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
-            {% for shopProduct in shop_product|slice:"1:" %}
-                <div class="row col-12  rounded se-co-bo m-0 p-3">
-                    <div class="row  col-4 pt-2 mx-auto">فروشنده:{{ shopProduct.shop.name }}</div>
-                    <div class="row col-4 justify-content-center pt-2 mx-auto">
-                        قیمت:{{ shopProduct.price }}</div>
-                    <div class="row col-4 justify-content-center mx-auto">
-                        <button data-product="{{ shopProduct.id }}" data-action="add" type="button"
-                                class="btn btn-info btn-lg btn-block  update-cart">افزودن به سبد خرید
-                        </button>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        <!--Related Product to current product-->
-        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
-            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3">
-                محصولات مرتبط
-            </div>
-
-            <div class="row col-12  rounded se-co-bo m-0 p-3">
-                {% for cat in related_categories %}
-                    <div class="row col-3  mx-auto   ">
-                        <div class="row col-12 m-0 justify-content-center  "><a href="{{ cat.get_absolute_url }}"><img class=""
-                                                                                  style="height: 250px ;width: auto"
-                                                                                  src="{{ cat.image.url }}" alt=""></a>
                         </div>
-                        <div class="row col-12 m-0 justify-content-center mt-3">Title:{{ cat.name }}</div>
-                        <div class="row col-12 m-0 justify-content-center mt-3">
-                            price:{{ cat.ShopProduct.all.first.price }}</div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Product Description -->
-        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
-            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3">توضیحات</div>
-            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3 description-height">{{ product.detail }}</div>
-        </div>
-
-        <!-- Product Comment-->
-        <div class="row  col-12 border border-white rounded  m-0 mt-5 p-0">
-            <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3" id="comment_container">نظرها</div>
-            {% for comment in comments %}
-                <div class="row col-12  rounded se-co-bo border-bottom m-0 p-3 comment-height commententries">
-                    <div class="row col-2  rounded se-co-bo border-bottom m-0 p-3 author-name">{{ comment.author.first_name }}</div>
-                    <div class="row col-10  rounded se-co-bo border-bottom m-0 p-3 comment-body">{{ comment.content }}</div>
-                    <div class="reply">
-                        <p>
-                            <span id="dislike_count_container{{ comment.id }}"><i
-                                    onclick="likeComment({{ comment.id }} , false)"
-                                    class="fa fa-thumbs-down"></i></span>
-                            <span id="like_count_container{{ comment.id }}"><i onclick="likeComment({{ comment.id }})"
-                                                                               class="fa fa-thumbs-up"></i></span>
-                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>
-                        </p>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-        <form id="comment_form">
-            {% csrf_token %}
-            <div class="d-flex flex-column mt-3 mb-3">
-                <textarea class="mt-3 p-2 m-auto comment_text" rows="8" id="id_content"></textarea>
-                <input type="submit" class="btn btn-primary mt-2 comment_button" value="ارسال نظر">
             </div>
-        </form>
+        </div>
+
     </div>
+
+
 {% endblock %}
+
+
+
 {% block product_script %}
-<script>
-    document.getElementById("comment_form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        const content = $('#id_content').val()
-        const data = JSON.stringify({content, product_id:{{product.id}}})
-        $.ajax({
-            type: "POST",
-            url: "{% url 'comment_create' %}",
-            data: data,
-            success: function (response) {
-                const data = JSON.parse(response)
-                $("#comment_container").prepend(`<div class="row col-12  rounded se-co-bo border-bottom m-0 p-3 comment-height commententries">
-                    <div class="row col-2  rounded se-co-bo border-bottom m-0 p-3 author-name">${data.first_name}</div>
-                    <div class="row col-10  rounded se-co-bo border-bottom m-0 p-3 comment-body">${data.content}</div>
-                    <div class="reply">
-                        <p>
-                            <span id="dislike_count_container${data.comment_id}"><i
-                                    onclick="likeComment(${data.comment_id} , false)"
-                                    class="fa fa-thumbs-down"></i></span>
-                            <span id="like_count_container${data.comment_id}"><i onclick="likeComment(${data.comment_id})"
-                                                                               class="fa fa-thumbs-up"></i></span>
-                            <span><i class="fa fa-reply" aria-hidden="true"></i></span>
-                        </p>
-                    </div>
-                </div>`);
-            }
+    <script>
+        jQuery(document).ready(function ($) {
+            document.getElementById("comment_form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                const content = $('#comment').val()
+                const data = JSON.stringify({content, product_id:{{product.id}}})
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'comment_create' %}",
+                    data: data,
+                    success: function (response) {
+                        const data = JSON.parse(response)
+                        $("#comment_container").prepend(`<li class="comment">
+                                                                                <div class="comment-wrap">
+                                                                                    <div class="comment-img">
+                                                                                        <img alt=""
+                                                                                             src="{% static 'images/profile/avatar.jpeg' %}"
+                                                                                             class='avatar' height='80'
+                                                                                             width='80'/>
+                                                                                    </div>
+                                                                                    <div class="comment-block">
+                                                                                        <header class="comment-header">
+                                                                                            <cite class="comment-author">
+                                                                                               ${data.first_name}
+                                                                                            </cite>
+                                                                                        </header>
+                                                                                        <div class="comment-content">
+                                                                                            <p>
+                                                                                               ${data.content}
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </li>`);
+                    }
+                });
+            }, false)
         });
-    }, false);
-</script>
+    </script>
 {% endblock %}

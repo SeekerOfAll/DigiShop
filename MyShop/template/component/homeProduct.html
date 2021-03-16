@@ -1,0 +1,204 @@
+{% load static %}
+
+<div class="container">
+    <div class="row row-fluid">
+        <div class="col-sm-12">
+            <h2 class="mb-5 heading-nice-border text-center">
+                <span class="nice-border">
+                    <span class="nice-border-bottom-right"></span>
+                    <span class="nice-border-top-left"></span>
+                    <span class="nice-border-content">FEATURED PRODUCTS</span>
+                </span>
+            </h2>
+            <div class="tta-container">
+                <div class="general tta tta-spacing-1 tabs-border tta-controls-align-center">
+                    <div class="tta-tabs-container">
+                        <ul class="nav nav-tabs tta-tabs-list">
+                            <li class="tta-tab active">
+                                <a data-toggle="tab" href="#tab-1">WOMEN&acute;S</a>
+                            </li>
+                            <li class="tta-tab">
+                                <a data-toggle="tab" href="#tab-2">MEN&acute;S</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content mt-4">
+                            <div id="tab-1" class="tab-pane fade in active">
+                                <div class="caroufredsel product-slider"
+                                     data-height="variable" data-scroll-fx="scroll"
+                                     data-scroll-item="1" data-visible-min="1"
+                                     data-visible-max="4" data-responsive="1"
+                                     data-infinite="1" data-autoplay="0" data-circular="1">
+                                    <div class="caroufredsel-wrap">
+                                        <div class="commerce commerce-lookbok columns-4">
+                                            <ul class="products columns-4" data-columns="4">
+                                                {% for product in productsWomen %}
+                                                    <li class="product">
+                                                        <div class="product-container">
+                                                            <figure>
+                                                                <div class="product-wrap">
+                                                                    <div class="product-images">
+                                                                        <div class="shop-loop-thumbnail shop-loop-front-thumbnail">
+                                                                            <a href="{{ product.get_absolute_url }}">
+                                                                                <img width="400"
+                                                                                     height="450"
+                                                                                     src="{{ product.image.url }}"
+                                                                                     alt="Product-1"/>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="shop-loop-thumbnail shop-loop-back-thumbnail">
+                                                                            <a href="{{ product.get_absolute_url }}">
+                                                                                <img width="400"
+                                                                                     height="450"
+                                                                                     src="{{ product.image.url }}"
+                                                                                     alt="Product-1alt"/>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="shop-loop-actions">
+                                                                        <a href="#"
+                                                                           class="add_to_cart_button product_type_simple product_type_simple">
+                                                                            View
+                                                                        </a>
+                                                                        <a class="shop-loop-quickview"
+                                                                           href="{{ product.get_absolute_url }}"
+                                                                           data-original-title="Quick view">
+                                                                        </a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#"
+                                                                                   class="add_to_wishlist">
+                                                                                    Add to
+                                                                                    Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <figcaption>
+                                                                    <div class="shop-loop-product-info">
+                                                                        <div class="info-title">
+                                                                            <h3 class="product_title">
+                                                                                <a href="{{ product.get_absolute_url }}">
+                                                                                    {{ product.name }}
+                                                                                </a>
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="info-meta">
+                                                                            <div class="info-price">
+                                                                                <span class="price">
+                                                                                    <span class="amount">
+                                                                                        12.00&#36;
+                                                                                    </span>
+                                                                                    &ndash;
+                                                                                    <span class="amount">
+                                                                                        23.00&#36;
+                                                                                    </span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </figcaption>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <a href="#" class="caroufredsel-prev"></a>
+                                        <a href="#" class="caroufredsel-next"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane fade">
+                                <div class="caroufredsel product-slider"
+                                     data-height="variable" data-scroll-fx="scroll"
+                                     data-scroll-item="1" data-visible-min="1"
+                                     data-visible-max="4" data-responsive="1"
+                                     data-infinite="1" data-autoplay="0" data-circular="1">
+                                    <div class="caroufredsel-wrap">
+                                        <div class="commerce commerce-lookbok columns-4">
+                                            <ul class="products columns-4" data-columns="4">
+                                                {% for product in productsMen %}
+                                                    <li class="product">
+                                                        <div class="product-container">
+                                                            <figure>
+                                                                <div class="product-wrap">
+                                                                    <div class="product-images">
+                                                                        <div class="shop-loop-thumbnail shop-loop-front-thumbnail">
+                                                                            <a href="{{ product.get_absolute_url }}">
+                                                                                <img width="400" height="450"
+                                                                                     src="{{ product.image.url }}"
+                                                                                     alt="Product-1"/>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="shop-loop-thumbnail shop-loop-back-thumbnail">
+                                                                            <a href="{{ product.get_absolute_url }}">
+                                                                                <img width="400" height="450"
+                                                                                     src="{{ product.image.url }}"
+                                                                                     alt="Product-1alt"/>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="shop-loop-actions">
+                                                                        <a href="#"
+                                                                           class="add_to_cart_button product_type_simple product_type_simple">
+                                                                            View
+                                                                        </a>
+                                                                        <a class="shop-loop-quickview"
+                                                                           href="{{ product.get_absolute_url }}"
+                                                                           data-original-title="Quick view">
+                                                                        </a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to
+                                                                                    Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <figcaption>
+                                                                    <div class="shop-loop-product-info">
+                                                                        <div class="info-title">
+                                                                            <h3 class="product_title">
+                                                                                <a href="{{ product.get_absolute_url }}">
+                                                                                    {{ product.name }}
+                                                                                </a>
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="info-meta">
+                                                                            <div class="info-price">
+                                                                                <span class="price">
+                                                                                    <span class="amount">
+                                                                                        12.00&#36;
+                                                                                    </span>
+                                                                                    &ndash;
+                                                                                    <span class="amount">
+                                                                                        23.00&#36;
+                                                                                    </span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </figcaption>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <a href="#" class="caroufredsel-prev"></a>
+                                        <a href="#" class="caroufredsel-next"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

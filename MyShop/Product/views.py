@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DetailView, ListView
-from Account.models import Shop
+from Account.models import Shop, User
 from Order.models import Basket, Order, OrderItem
 from .models import Category, Product, ProductMeta, Comment, ShopProduct
 
@@ -14,8 +14,9 @@ from .models import Category, Product, ProductMeta, Comment, ShopProduct
 # Create your views here.
 class CategoryDetailView(ListView):
     model = Product
-    template_name = 'category_product.html'
+    template_name = 'shop-by-category.html'
     slug_url_kwarg = 'cat_slug'
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = super(CategoryDetailView, self).get_queryset()
@@ -27,13 +28,28 @@ class CategoryDetailView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CategoryDetailView, self).get_context_data()
         print(kwargs)
+
         context['categories'] = Category.objects.filter(slug=self.kwargs["cat_slug"])
         context['category_all'] = Category.objects.all()
-        brand_list = set([product.brand.name for product in context['product_list']])
+        # brand_list = set([product.brand.name for product in context['product_list']])
+        brand_list = set([product.brand.name for product in Product.objects.all()])
         context["brand_list"] = list(brand_list)
+
+        brand_count_list = []
+        for brand in brand_list:
+            count = 0
+            for product in Product.objects.all():
+                if product.brand.name == brand:
+                    count = count + 1
+            brand_count_list.append([brand, count])
+        context['brand_count_list'] = brand_count_list
+
         print(brand_list)
         print(context)
         total_items = OrderItem.objects.aggregate(Sum("count"))
+        print(total_items)
+        product_list=context["product_list"]
+        print(product_list)
         context['total_items'] = total_items
         return context
 
@@ -47,6 +63,7 @@ class ProductDetail(DetailView):
         context = super().get_context_data(**kwargs)
         product = context['product']
         context['shop_product'] = ShopProduct.objects.filter(product=context['object'])
+
         context['related_categories'] = Product.objects.filter(category=product.category)
         total_items = OrderItem.objects.aggregate(Sum("count"))
         context['total_items'] = total_items
@@ -65,7 +82,26 @@ class SearchResultsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['category_all'] = Category.objects.all()
+        # brand_list = set([product.brand.name for product in context['product_list']])
+        brand_list = set([product.brand.name for product in Product.objects.all()])
+        context["brand_list"] = list(brand_list)
+
+        brand_count_list = []
+        for brand in brand_list:
+            count = 0
+            for product in Product.objects.all():
+                if product.brand.name == brand:
+                    count = count + 1
+            brand_count_list.append([brand, count])
+        context['brand_count_list'] = brand_count_list
+
+        print(brand_list)
+        print(context)
         total_items = OrderItem.objects.aggregate(Sum("count"))
+        print(total_items)
+        product_list = context["product_list"]
+        print(product_list)
         context['total_items'] = total_items
         return context
 
@@ -76,7 +112,8 @@ def create_comment(request):
     user = request.user
     try:
         comment = Comment.objects.create(product_id=data['product_id'], content=data['content'], author=user)
-        response = {"comment_id": comment.id, "content": comment.content,'first_name': user.first_name, 'last_name': user.last_name}
+        response = {"comment_id": comment.id, "content": comment.content, 'first_name': user.first_name,
+                    'last_name': user.last_name}
         return HttpResponse(json.dumps(response), status=201)
     except:
         response = {"error": 'error'}

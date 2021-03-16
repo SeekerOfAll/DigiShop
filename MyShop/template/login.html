@@ -1,22 +1,63 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block title %}
-    Login
-{% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-8">
-                <form action="{% url 'login' %}" method="post">
-                    {% csrf_token %}
-                    {% include 'component/signForm.html' %}
-                    <p class="submit"><input type="submit" name="commit" value="Login"></p>
-                    <div class="login-help">
-                        <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
-                    </div>
-                </form>
 
+{#{% block signup %}#}
+{#    <link rel="stylesheet" href="{% static 'css/signup.css' %}">#}
+{#{% endblock %}#}
+
+{% block content %}
+    <div id="wrapper" class="wide-wrap">
+
+        <div class="offcanvas-overlay"></div>
+
+        <div class="heading-container">
+            <div class="container heading-standar">
+                <div class="page-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'homeView' %}" class="home"><span>Home</span></a></li>
+                        <li>Login</li>
+                    </ul>
+                </div>
             </div>
         </div>
+        <div class="content-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 main-wrap">
+                        <div class="main-content">
+                            <div class="commerce-account">
+                                <div class="commerce">
+                                    <h2 class="commerce-account-heading">Login</h2>
+                                    <form class="login" action="{% url 'login' %}" method="POST">
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                            <div class="form-row form-row-wide">
+                                                <label for="username" class="" style="text-align:center;">
+                                                    {{ field.label_tag }}
+                                                </label>
+                                                <p class="" style="text-align:center;">{{ field }}</p>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="form-row" style="text-align:center;">
+                                            <label for="rememberme" class="inline form-flat-checkbox" >
+                                                <input name="rememberme" type="checkbox" id="rememberme"
+                                                       value="forever"/>
+                                                <i></i>Remember me
+                                            </label>
+                                            <br><br>
+                                            <input type="submit" class="button" name="login" value="Login"/>
+                                        </div>
+                                        <div class="lost_password" style="text-align:center;">
+                                            <a href="#" >Lost your password?</a> | <a href="{% url 'register' %}">Don't have a Account?</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

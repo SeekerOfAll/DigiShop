@@ -1,22 +1,93 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <!-- Start Slider -->
-    {% include 'component/topSlider.html' with slideShow=slides %}
-    <!-- End Slider -->
 
-    <!-- Start Brand  -->
-    {% include 'component/brand_index.html' with brandShow=brands %}
-    <!-- End Brand -->
+    <div id="wrapper" class="wide-wrap">
+        <div class="offcanvas-overlay"></div>
 
-    <!-- Start Categories  -->
-    {% include 'component/category_index.html' with categoryShow=categories %}
-    <!-- End Categories -->
+        <div class="content-container no-padding">
+            <div class="container-full">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main-content">
+                            <!-- Start Slider -->
+                            {% include 'component/homeSlider.html' with slideShow=slides %}
+                            <!-- End Slider -->
 
-    <!-- Start Products  -->
-    {% include 'component/product_index.html' with productView=products %}
-    <!-- End Products  -->
+                            <!-- Start Categories  -->
+                            {% include 'component/homeCategory.html' with categoryShow=categories %}
+                            <!-- End Categories -->
 
+                            <!-- Start Products  -->
+                            {% include 'component/homeProduct.html' with productsWomen=productsWomen productsMen=productsMen %}
+                            <!-- End Products  -->
 
+                            <div class="row row-fluid clients">
+                                <div class="col-sm-12">
+                                    <div class="container">
+                                        <div class="row row-fluid mb-0">
+                                            <div class="col-sm-12">
+                                                <div class="client client-slider">
+                                                    <div class="caroufredsel" data-visible-min="1" data-visible-max="6"
+                                                         data-responsive="1" data-infinite="1" data-autoplay="1">
+                                                        <div class="caroufredsel-wrap">
+                                                            <ul class="caroufredsel-items row">
+                                                                <li class="caroufredsel-item col-md-2">
+                                                                    <a href="#">
+                                                                        <img alt=""
+                                                                             src="{% static 'images/client/thumb_188x110.jpg' %}">
+                                                                    </a>
+                                                                </li>
+                                                                <li class="caroufredsel-item col-md-2">
+                                                                    <a href="#">
+                                                                        <img alt=""
+                                                                             src="{% static 'images/client/thumb_188x110.jpg' %}">
+                                                                    </a>
+                                                                </li>
+                                                                <li class="caroufredsel-item col-md-2">
+                                                                    <a href="#">
+                                                                        <img alt=""
+                                                                             src="{% static 'images/client/thumb_188x110.jpg' %}">
+                                                                    </a>
+                                                                </li>
+                                                                <li class="caroufredsel-item col-md-2">
+                                                                    <a href="#">
+                                                                        <img alt=""
+                                                                             src="{% static 'images/client/thumb_188x110.jpg' %}">
+                                                                    </a>
+                                                                </li>
+                                                                <li class="caroufredsel-item col-md-2">
+                                                                    <a href="#">
+                                                                        <img alt=""
+                                                                             src="{% static 'images/client/thumb_188x110.jpg' %}">
+                                                                    </a>
+                                                                </li>
+                                                                <li class="caroufredsel-item col-md-2">
+                                                                    <a href="#">
+                                                                        <img alt=""
+                                                                             src="{% static 'images/client/thumb_188x110.jpg' %}">
+                                                                    </a>
+                                                                </li>
+                                                                <li class="caroufredsel-item col-md-2">
+                                                                    <a href="#">
+                                                                        <img alt=""
+                                                                             src="{% static 'images/client/thumb_188x110.jpg' %}">
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

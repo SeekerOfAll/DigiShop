@@ -6,141 +6,146 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container" style="direction: ltr">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="box-element">
 
-                    <a class="btn btn-outline-dark" href="#">&#x2190; Continue Shopping</a>
-
-                    <br>
-                    <br>
-                    <table class="table">
-                        <tr>
-                            <th><h5>Items: <strong>{{ total_items.count__sum }}</strong></h5></th>
-                            <th><h5>Total:<strong> ${{ total_price.price__sum|floatformat:2 }}</strong></h5></th>
-                            <th>
-                                <a style="float:right; margin:5px;" class="btn btn-success" href="#">Checkout</a>
-                            </th>
-                        </tr>
-                    </table>
-
+    <div id="wrapper" class="wide-wrap">
+        <div class="offcanvas-overlay"></div>
+        <div class="heading-container">
+            <div class="container heading-standar">
+                <div class="page-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'homeView' %}" class="home"><span>Home</span></a></li>
+                        <li>Cart</li>
+                    </ul>
                 </div>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 main-wrap">
+                        <div class="main-content">
+                            <div class="commerce">
+                                <form>
+                                    <table class="table shop_table cart">
+                                        <thead>
+                                        <tr>
+                                            <th class="product-remove hidden-xs">&nbsp;</th>
+                                            <th class="product-thumbnail hidden-xs">&nbsp;</th>
+                                            <th class="product-name">Product</th>
+                                            <th class="product-price text-center">Price</th>
+                                            <th class="product-quantity text-center">Quantity</th>
+                                            <th class="product-subtotal text-center hidden-xs">Total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if order_item %}
+                                            {% for item in order_item %}
+                                                <tr class="cart_item">
+                                                    <td class="product-remove hidden-xs">
+                                                        <a href="#" data-product="{{ item.shop_product.id }}"
+                                                           data-action="delete" class="remove update-cart"
+                                                           title="Remove this item">&times;</a>
+                                                    </td>
+                                                    <td class="product-thumbnail hidden-xs">
+                                                        <a href="{{ item.shop_product.product.get_absolute_url }}">
+                                                            <img width="100" height="150"
+                                                                 src="{{ item.shop_product.product.image.url }}"
+                                                                 alt="Product-1"/>
+                                                        </a>
+                                                    </td>
+                                                    <td class="product-name">
+                                                        <a href="{{ item.shop_product.product.get_absolute_url }}">{{ item.shop_product.product.name }}</a>
+                                                        {#                                                    <dl class="variation">#}
+                                                        {#                                                        <dt class="variation-Color">Color:</dt>#}
+                                                        {#                                                        <dd class="variation-Color"><p>Green</p></dd>#}
+                                                        {#                                                        <dt class="variation-Size">Size:</dt>#}
+                                                        {#                                                        <dd class="variation-Size"><p>Extra Large</p></dd>#}
+                                                        {#                                                    </dl>#}
+                                                    </td>
+                                                    <td class="product-price text-center">
+                                                        <span class="amount">&#36;{{ item.shop_product.price|floatformat:2 }}</span>
+                                                    </td>
+                                                    <td class="product-quantity text-center">
+                                                        <div class="quantity">
+                                                            <img data-product="{{ item.shop_product.id }}"
+                                                                 data-action="remove"
+                                                                 class="chg-quantity update-cart"
+                                                                 style="height: 15px;width: auto;display: inline-block"
+                                                                 src="{% static  'images/cart_image/arrow-down.png' %}">
+                                                            <input type="text" name="qunatity" value="{{ item.count }}"
+                                                                   title="Qty" class="qty"
+                                                                   style="display: inline-block"/>
+                                                            <img data-product="{{ item.shop_product.id }}"
+                                                                 data-action="add"
+                                                                 class="chg-quantity update-cart"
+                                                                 style="height: 15px;width: auto;display: inline-block"
+                                                                 src="{% static  'images/cart_image/arrow-up.png' %}">
 
-                <br>
-                <div class="box-element">
-                    <div class="cart-row">
-                        <div style="flex:2"></div>
-                        <div style="flex:2"><strong>Item</strong></div>
-                        <div style="flex:1"><strong>Price</strong></div>
-                        <div style="flex:1"><strong>Quantity</strong></div>
-                        <div style="flex:1"><strong>Total</strong></div>
-                    </div>
-                    {% for item in order_item %}
-                        <div class="cart-row">
-                            <div style="flex:2"><img class="row-image" src="{{item.shop_product.product.image.url}}"></div>
-                            <div style="flex:2"><p>{{ item.shop_product.product.name }}</p></div>
-                            <div style="flex:1"><p>${{ item.shop_product.price|floatformat:2 }}</p></div>
-                            <div style="flex:1">
-                                <p class="quantity">{{ item.count }}</p>
-                                <div class="quantity">
-                                    <img data-product="{{ item.shop_product.id }}" data-action="add"
-                                         class="chg-quantity update-cart" src="{% static  'images/cart_image/arrow-up.png' %}">
 
-                                    <img data-product="{{ item.shop_product.id }}" data-action="remove"
-                                         class="chg-quantity update-cart" src="{% static  'images/cart_image/arrow-down.png' %}">
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-subtotal hidden-xs text-center">
+                                                        <span class="amount">&#36;{{ item.total_price|floatformat:2 }}</span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td class="text-center" style="font-size: 20px">There is no Product in Cart</td>
+                                            </tr>
+                                        {% endif %}
+                                        {#                                        <tr>#}
+                                        {#                                            <td colspan="6" class="actions">#}
+                                        {#                                                <input type="submit" class="button update-cart-button"#}
+                                        {#                                                       name="update_cart" value="Update Cart"/>#}
+                                        {#                                            </td>#}
+                                        {#                                        </tr>#}
+                                        </tbody>
+                                    </table>
+                                </form>
+                                <div class="cart-collaterals">
+                                    <div class="cart_totals">
+                                        <h2>Cart Totals</h2>
+                                        <table>
+                                            <tr class="cart-subtotal">
+                                                <th>Items</th>
+                                                <td><span class="amount">{{ total_items.count__sum }}</span></td>
+                                            </tr>
+                                            <tr class="cart-subtotal">
+                                                <th>Subtotal</th>
+                                                <td><span
+                                                        class="amount">&#36;{{ total_price.price__sum|floatformat:2 }}</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="shipping">
+                                                <th>Shipping</th>
+                                                <td><span class="amount">&#36;0.00</span></td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <th>Total</th>
+                                                <td><strong><span
+                                                        class="amount">&#36;{{ total_price.price__sum|floatformat:2 }}</span></strong>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="wc-proceed-to-checkout">
+                                            <a href="#" class="checkout-button button alt wc-forward">Proceed to
+                                                Checkout</a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div style="flex:1"><p>${{ item.total_price|floatformat:2 }}</p></div>
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block cart_script %}
     <script src="{% static 'js/cartScript.js' %}"></script>
 {% endblock %}
-
-{#    <!-- Start All Title Box -->#}
-{#    <div class="all-title-box mb-0">#}
-{#        <div class="container">#}
-{#            <div class="row">#}
-{##}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <!-- End All Title Box -->#}
-{##}
-{#    <!-- Start Cart  -->#}
-{#    <div class="container">#}
-{#        <div class="row">#}
-{#            <div class="col-lg-12">#}
-{#                <h2>Cart</h2>#}
-{#                <ul class="breadcrumb justify-content-center">#}
-{#                    <li class="breadcrumb-item"><a href="#">Shop</a></li>#}
-{#                    <li class="breadcrumb-item active">Cart</li>#}
-{#                </ul>#}
-{#            </div>#}
-{#            <div class="shopping-cart col-12 mt-0 mb-0">#}
-{#                <!-- Title -->#}
-{#                {% if status %}#}
-{#                    <div class="title d-flex justify-content-center">#}
-{#                        {{ status }}#}
-{#                    </div>#}
-{#                {% else %}#}
-{#                    <div class="title d-flex justify-content-center">#}
-{#                        Shopping Bag#}
-{#                    </div>#}
-{#                {% endif %}#}
-{##}
-{#                <!-- Product #1 -->#}
-{#                <div class="item col-12">#}
-{#                    <div class="buttons">#}
-{#                        <span class="delete-btn"></span>#}
-{#                    </div>#}
-{#                    <div>#}
-{#                        <img class="image_max mr-0" src="../static/images/shirt-img.jpg" alt="">#}
-{#                    </div>#}
-{##}
-{#                    <div class="description">#}
-{#                        <span>Common Projects</span>#}
-{#                    </div>#}
-{#                    <div class="quantity">#}
-{#                        <button class="plus-btn" type="button" name="button">#}
-{#                            <img src="{% static 'image/icon/plus.svg' %}" alt=""/>#}
-{#                        </button>#}
-{#                        <input type="text" name="name" value="1">#}
-{#                        <button class="minus-btn" type="button" name="button">#}
-{#                            <img src="{% static 'image/icon/minus.svg' %}" alt=""/>#}
-{#                        </button>#}
-{#                    </div>#}
-{#                    <div class="total-price">$549</div>#}
-{#                </div>#}
-{##}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="row">#}
-{#            <div class=" col-12" style="background-color: white">#}
-{#                <div class="my-4">#}
-{#                    <div class="col-12">#}
-{#                        <div class="d-flex gr-total ">#}
-{#                            <div class="col-6"><h5>Grand Total</h5></div>#}
-{#                            <div class="d-flex col-6 ml-auto h5 justify-content-start"> $ 388</div>#}
-{#                        </div>#}
-{#                        <hr>#}
-{#                    </div>#}
-{#                    <div class="d-flex col-12 shopping-box justify-content-center">#}
-{#                        <a href="checkout.html" class=" btn hvr-hover">#}
-{#                            Checkout#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{##}
-{#    </div>#}
-{##}
-{#    <!-- End Cart -->#}

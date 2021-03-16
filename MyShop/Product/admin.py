@@ -12,7 +12,7 @@ class ChildrenInLine(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields': ['name', 'slug', 'detail', 'image']}),
+    fieldsets = [(None, {'fields': ['name', 'slug', 'detail','description', 'image']}),
                  ('Related Table Information', {'fields': ['brand', 'category'], 'classes': ['collapse']}),
                  ]
     list_display = ('name', 'detail', 'brand', 'category')

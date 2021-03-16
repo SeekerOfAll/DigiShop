@@ -15,7 +15,8 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['slides'] = SlideShow.objects.all()
         context['categories'] = Category.objects.all()
-        context['products'] = Product.objects.all()
+        context['productsWomen'] = Product.objects.filter(category__name__contains='ladies')
+        context['productsMen'] = Product.objects.filter(category__name__contains='men')
         context['brands'] = Brand.objects.all()
         total_items = OrderItem.objects.aggregate(Sum("count"))
         context['total_items'] = total_items

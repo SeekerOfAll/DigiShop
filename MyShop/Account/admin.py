@@ -7,8 +7,9 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'mobile')
-    fieldsets = [('Users', {'fields': ['first_name', 'last_name', 'email', 'mobile', 'image']})]
+    list_display = ('email', 'first_name', 'last_name', 'mobile','is_staff')
+    fieldsets = [('Users', {'fields': ['first_name', 'last_name', 'email', 'mobile', 'image']}),
+                 ('Permissions',{'fields':['is_staff','is_active','is_superuser','groups','user_permissions']})]
     add_fieldsets = (
         (None, {
             'classes': ('wide',),

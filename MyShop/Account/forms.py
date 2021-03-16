@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
@@ -7,25 +8,39 @@ from Account.models import Address
 User = get_user_model()
 
 
-class UserLoginForm(forms.Form):
-    username = forms.CharField(label=_('نام کاربری'), max_length=150,
-                               widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(label=_('کلمه عبور'), widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+class SignInForm(AuthenticationForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username', 'required': True}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'required': True}))
+
+
+
+# class CustomAuthenticationForm(AuthenticationForm):
+#     username = forms.CharField(widget=forms.TextInput(
+#         attrs={'class': 'form-control', 'placeholder': 'Username', 'required': True, 'autofocus': True}))
+#     password = forms.CharField(
+#         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password', 'required': True}))
+#     remember_me = forms.BooleanField(required=False)
 
 
 class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(label=_('Password'), required=True, widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_('Repeat Password'), required=True, widget=forms.PasswordInput)
+
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'mobile', 'password')
-        labels = {'username': _('نام کاربری'), 'email': _('ایمیل'), 'password': _('کلمه عبور'),
-                  'password2': _('تکرار کلمه عبور'), 'first_name': _('نام'), 'last_name': _('نام خانوادگی'), }
+        fields = ('first_name', 'last_name', 'email', 'mobile', 'password', 'password2',)
+        labels = {'email': _('Email'), 'password': _('Password'), 'mobile': _('Mobile'),
+                  'password2': _('Repeat Password'), 'first_name': _('First Name'), 'last_name': _('Last Name'), }
+
         widget = {'username': forms.TextInput(attrs={'class': 'form-control'}),
                   'email': forms.EmailInput(attrs={'class': 'form-control'}),
-                  'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-                  'password2': forms.PasswordInput(attrs={'class': 'form-control'}),
+                  # 'password': forms.PasswordInput(),
+                  # # 'mobile': forms.CharField(attrs={'class': 'form-control'}),
+                  # 'password2': forms.PasswordInput(),
                   'first_name': forms.TextInput(attrs={'class': 'form-control'}),
                   'last_name': forms.TextInput(attrs={'class': 'form-control'}), }
-        help_text = {'email': _('A valid email for reset your password'), }
+
+        # help_text = {'email': _('A valid email for reset your password'), }
 
 
 class EditProfileForm(forms.ModelForm):

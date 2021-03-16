@@ -56,6 +56,10 @@ def add_to_cart(request):
     elif action == 'remove':
         order_item.count = (order_item.count - 1)
         order_item.price = (int(order_item.price) - int(shop_product.price))
+
+    if action == 'delete':
+        order_item.count = 0
+
     order_item.save()
 
     if order_item.count <= 0:

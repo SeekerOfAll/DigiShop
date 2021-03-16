@@ -1,0 +1,231 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <div id="wrapper" class="wide-wrap">
+        <div class="offcanvas-overlay"></div>
+        <div class="heading-container heading-resize heading-no-button">
+            <div class="heading-background heading-parallax bg-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-wrap">
+                                <div class="page-title">
+                                    <h1>Shop by Category</h1>
+                                    <div class="page-breadcrumb">
+                                        <ul class="breadcrumb">
+                                            <li>
+                                                <a class="home" href="#"><span>Home</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><span>Shop</span></a>
+                                            </li>
+                                            <li>Nulla</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="container">
+                <div class="row">
+                    <div class="commerce page-layout-left-sidebar">
+                        <div class="col-md-9 main-wrap">
+                            <div class="main-content">
+                                <div class="woo-content">
+                                    <div class="shop-toolbar">
+                                        <div class="view-mode">
+                                            <a class="grid-mode active"><i class="fa fa-th"></i></a>
+                                            <a class="list-mode" href="#"><i class="fa fa-th-list"></i></a>
+                                        </div>
+                                        <form class="commerce-ordering clearfix">
+                                            <div class="commerce-ordering-select">
+                                                <label class="hide">Sorting:</label>
+                                                <div class="form-flat-select">
+                                                    <select name="orderby" class="orderby">
+                                                        <option value="" selected='selected'>Default sorting</option>
+                                                        <option value="">Sort by popularity</option>
+                                                        <option value="">Sort by average rating</option>
+                                                        <option value="">Sort by newness</option>
+                                                        <option value="">Sort by price: low to high</option>
+                                                        <option value="">Sort by price: high to low</option>
+                                                    </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="commerce-ordering-select">
+                                                <label class="hide">Show:</label>
+                                                <div class="form-flat-select">
+                                                    <select name="per_page" class="per_page">
+                                                        <option value="" selected='selected'>12</option>
+                                                        <option value="">24</option>
+                                                        <option value="">36</option>
+                                                    </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="shop-loop grid">
+                                        <ul class="products">
+                                            {% if product_list %}
+                                                {% for product in product_list %}
+                                                    <li class="product">
+                                                        <div class="product-container">
+                                                            <figure>
+                                                                <div class="product-wrap">
+                                                                    <div class="product-images">
+                                                                        <div class="shop-loop-thumbnail shop-loop-front-thumbnail">
+                                                                            <a href="#">
+                                                                                <img style="width: 400px;height: 300px"
+                                                                                     src="{{ product.image.url }}"
+                                                                                     alt="Product-1"/>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="shop-loop-thumbnail shop-loop-back-thumbnail">
+                                                                            <a href="#">
+                                                                                <img width="400" height="450"
+                                                                                     src="{{ product.image.url }}"
+                                                                                     alt="Product-1alt"/>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="shop-loop-actions">
+                                                                        <a href="#"
+                                                                           class="add_to_cart_button product_type_simple">
+                                                                            View
+                                                                        </a>
+                                                                        <a class="shop-loop-quickview"
+                                                                           href="{{ product.get_absolute_url }}"
+                                                                           data-original-title="Quick view">
+                                                                        </a>
+                                                                        <div class="yith-wcwl-add-to-wishlist">
+                                                                            <div class="yith-wcwl-add-button">
+                                                                                <a href="#" class="add_to_wishlist">
+                                                                                    Add to Wishlist
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <figcaption>
+                                                                    <div class="shop-loop-product-info">
+                                                                        <div class="info-title">
+                                                                            <h3 class="product_title">
+                                                                                <a href="{{ product.get_absolute_url }}">
+                                                                                    {{ product.name }}
+                                                                                </a>
+                                                                            </h3>
+                                                                        </div>
+                                                                        <div class="info-meta">
+                                                                            <div class="info-price">
+																			<span class="price">
+																				<span class="amount">
+																					{{ product.ShopProduct.all.first.price }}&#36;
+																				</span>
+																			</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </figcaption>
+                                                            </figure>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            {% else %}
+                                                <p class="fw-bolder text-center">There is no Product for current Category</p>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <nav class="commerce-pagination">
+                                        {#                                        <p class="commerce-result-count">#}
+                                        {#                                            Showing 1&ndash;6 of 14 results#}
+                                        {#                                        </p>#}
+                                        <div class="paginate">
+                                            <div class="paginate_links">
+                                                {% if page_obj.has_previous %}
+                                                    <a class="page-numbers" href="?page=1"> first</a>
+                                                    <a class="previous page-numbers"
+                                                       href="?page={{ page_obj.previous_page_number }}">
+                                                        <i class="fa fa-angle-left"></i>
+                                                    </a>
+                                                {% endif %}
+                                                <span class='page-numbers current'>{{ page_obj.number }}</span>
+                                                {% if page_obj.has_next %}
+                                                    <a class="next page-numbers"
+                                                       href="?page={{ page_obj.next_page_number }}">
+                                                        <i class="fa fa-angle-right"></i>
+                                                    </a>
+                                                    <a class='page-numbers '
+                                                       href="?page={{ page_obj.paginator.num_pages }}">last</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 sidebar-wrap">
+                            <div class="main-sidebar">
+                                <div class="widget widget_price_filter">
+                                    <h4 class="widget-title"><span>Price</span></h4>
+                                    <form>
+                                        <div class="price_slider_wrapper">
+                                            <div class="price_slider"></div>
+                                            <div class="price_slider_amount">
+                                                <input type="text" id="min_price" name="min_price" value=""
+                                                       data-min="10" placeholder="Min price"/>
+                                                <input type="text" id="max_price" name="max_price" value=""
+                                                       data-max="732" placeholder="Max price"/>
+                                                <button type="submit" class="button">Filter</button>
+                                                <div class="price_label">
+                                                    Price: <span class="from"></span> &mdash; <span class="to"></span>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="widget widget_layered_nav">
+                                    <h4 class="widget-title"><span>Brands</span></h4>
+                                    <ul>
+                                        {% for brand in brand_count_list %}
+                                            <li>
+                                                <a href="#">{{ brand.0 }}</a> <small class="count">{{ brand.1 }}</small>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="widget widget_product_categories">
+                                    <h4 class="widget-title"><span>Categories</span></h4>
+                                    <ul class="product-categories">
+                                        {% for category in category_all %}
+                                            {% if not category.parent %}
+                                                <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+                                                    <ul class="product-categories">
+                                                        {% for category_all in category_all %}
+                                                            {% if category_all.parent.name == category.name %}
+                                                                <li class="ml-3"><a
+                                                                        href="{{ category_all.get_absolute_url }}">{{ category_all.name }}</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -15,6 +15,8 @@ class Product(models.Model):
     name = models.CharField(_('Name'), max_length=150)
     image = models.ImageField(_('Image'), upload_to='product/image/', max_length=100)
     detail = models.CharField(_('Detail'), max_length=150)
+    description = models.CharField(_('Description'), max_length=2000,)
+
 
     class Meta:
         verbose_name = _('product')

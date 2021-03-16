@@ -7,12 +7,7 @@ from django.conf import settings
 
 # Create your models here.
 class UserManager(BaseUserManager):
-    use_in_migrations = True
-
     def _create_user(self, email, password, **extra_fields):
-        """
-        Create and save a user with the given username, email, and password.
-        """
         if not email:
             raise ValueError('The given username must be set')
         email = self.normalize_email(email)
@@ -21,20 +16,14 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email=None, password=None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, email=None, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
-
         return self._create_user(email, password, **extra_fields)
 
 
@@ -64,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = [first_name, last_name]
 
     class Meta:
         verbose_name = _('user')
@@ -86,10 +75,10 @@ class Email(models.Model):
 
 
 class Address(models.Model):
-    city = models.CharField(_('City'), max_length=50)
-    street = models.CharField(_('Street'), max_length=50)
-    alley = models.CharField(_('Alley'), max_length=50)
-    zip_code = models.CharField(_('Zip_Code'), max_length=50)
+    city = models.CharField(_('City'), max_length=50,  blank=True,)
+    street = models.CharField(_('Street'), max_length=50, blank=True)
+    alley = models.CharField(_('Alley'), max_length=50,  blank=True)
+    zip_code = models.CharField(_('Zip_Code'), max_length=50,  blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("User"), related_name='Address',
                              related_query_name='Address', on_delete=models.CASCADE)
 
